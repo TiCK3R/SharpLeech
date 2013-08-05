@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- SharpLeech 2.x.x SiteReader Plugin -->
+
+<!-- Version MUST be in x.x.x.x format! -->
+<SiteReader pluginVersion="2.0.0.0" pluginAuthor="Hyperz">
+	<Settings>
+		<SiteName>PornBB</SiteName>
+		<BaseUrl>http://www.pornbb.org</BaseUrl>
+		<TopicsPerPage>45</TopicsPerPage>
+		
+		<!-- Supported type values are: IP.Board 3.1.4+, IP.Board 3.x.x, IP.Board 2.x.x,
+			 vBulletin 4.x.x, vBulletin 3.x.x, phpBB 3.x.x, phpBB 2.x.x -->
+		<Type>phpBB 2.x.x</Type>
+		
+		<!-- If unsure choose ISO-8859-1. Except for phpBB 3 boards, they use UTF-8 by default. -->
+		<DefaultEncoding>ISO-8859-1</DefaultEncoding>
+		
+		<!-- Set to true if the site uses SEO urls, otherwise false. -->
+		<AllowRedirects>true</AllowRedirects>
+		<UseFriendlyLinks>true</UseFriendlyLinks>
+	</Settings>
+
+	<Sections>
+		<Section title="XXX Movies" id="1" />
+		<Section title="XXX Video Mega Threads" id="2" />
+		<Section title="XXX Videos" id="3" />
+		<Section title="XXX High Definition Videos" id="42" />
+		<Section title="Celebrity XXX Videos" id="29" />
+		<Section title="Amateur XXX Videos" id="22" />
+		<Section title="Vintage Videos &amp; Movies" id="38" />
+		<Section title="Hentai Movies/Videos" id="20" />
+		<Section title="XXX Streaming Videos" id="40" />
+		<Section title="XXX Amateur Streaming Videos" id="41" />
+		<Section title="Picture Mega Threads" id="26" />
+		<Section title="Hardcore Pictures" id="4" />
+		<Section title="Softcore Pictures" id="5" />
+		<Section title="Celebrity Pictures" id="15" />
+		<Section title="Amateur Pictures" id="23" />
+		<Section title="Hentai Pictures" id="21" />
+		<Section title="XXX Passwords" id="10" />
+		<Section title="XXX Stories" id="16" />
+		<Section title="XXX Games" id="31" />
+		<Section title="XXX Magazines" id="39" />
+		<Section title="Other Downloads" id="17" />
+		
+		<!-- If you have an account with VIP access you can un-comment this (:
+		<Section title="VIP / Donators Only" id="24" />
+		-->
+	</Sections>
+
+	<!-- Edit this when the site requires custom parsing -->
+	<Code>
+		<![CDATA[
+		
+		protected override void Init()
+		{
+			base.Init();
+		}
+
+		public override void LoginUser(string username, string password)
+		{
+			base.LoginUser(username, password);
+		}
+
+		public override void LogoutUser()
+		{
+			base.LogoutUser();
+		}
+
+		public override string[] GetTopicUrls(string html)
+		{
+			return base.GetTopicUrls(html);
+		}
+
+		public override SiteTopic GetTopic(string url)
+		{
+			return base.GetTopic(url);
+		}
+
+		public override SiteTopic GetTopic(int topicId)
+		{
+			return base.GetTopic(topicId);
+		}
+		
+		public override HttpWebRequest GetPage(int sectionId, int page, int siteTopicsPerPage)
+		{
+			return base.GetPage(sectionId, page, siteTopicsPerPage);
+		}
+
+		public override void MakeReady(int sectionId)
+		{
+			base.MakeReady(sectionId);
+		}
+		
+		]]>
+	</Code>
+</SiteReader>

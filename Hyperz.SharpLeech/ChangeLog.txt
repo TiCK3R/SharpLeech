@@ -1,0 +1,42 @@
+﻿Changes Since v2.0.0 ALPHA:
+Switched to .NET 4.0 RTM (the final version).
+Fixed the IRC client not sending a nickchange request when changing your nickname in the options.
+Fixed a resource leak in one of the async fucntions due to not handling the IAsyncResult.
+Fixed the radio volume (and slider) not updating when restoring the default settings.
+Fixed a problem where logging in to a vBulletin 4.0.3 forum wouldn't work.
+Fixed a crash that would occur when leeching in async mode due to a thread safety issue.
+Fixed a crash that would occur when clicking the Copy Url button when the url was 'null'.
+Fixed a crash that would occur when clicking the Open topic in a browser button when the url was 'null'.
+Fixed an issue with the Warez-BB plugin.
+Fixed an issue with the Warez-Centre plugin.
+Changed the logo to the new one that was created by Elio.
+Changed the application icon. Again.
+[strike]Changed the internal proxy setup from forced off to the .NET default (same as SL1)[/strike].
+Changed the internal proxy setup from forced off to the systems default proxy settings.
+Changed font for the white text with the black outer-glow effect.
+Added a plugin for TehParadox.
+Added a plugin for ForumW (.org).
+Removed the Stats tab (moved to a future version).
+Removed the Feed tab (moved to a future version).
+Removed some TV station streams that were no longer broadcasting.
+The start page number now increments when leeching like it was in SL1.
+Flagged the [i]LeechClient[/i] thread as [i]BackGround[/i] thread.
+
+==========================================================
+
+Changes Since v2.0.0 Pre-ALPHA:
+Fixed a crash that would occur on some PC's when a window is oppened for the 2nd time.
+Fixed a crash that would occur on some PC's when clicking on the login button.
+Fixed a crash or freeze that would occur when the Start Leeching button was clicked.
+Fixed the program not logging the ChatBox content when the option is enabled.
+Fixed a typo. I'm sure there are more typos left in the GUI so let me know if you find one!
+Added error logging layer.
+Added asynchronous leeching (300%+ speedboost on 5Mbit+ connections and fast sites).
+Removed all F# code and ported it to the C# DLL. The F# runtime is no longer required to be installed.
+Improved duplicate topic posting prevention - It will now check the hash before actually reading the topic (speed improvement).
+Improved Keep-Alive requests.
+Increased HTTP connection limit (2 -> 12).
+Changed the default timeout value from 100.000 to 30.000 ms.
+Changed the default Regex settings (they are now enabled by default).
+Changed the default ChatBox nickname. The program will now set your Windows username as default value.
+Changed the window background color for the non-Aero interface.

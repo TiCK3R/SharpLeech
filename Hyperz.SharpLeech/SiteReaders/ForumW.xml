@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- SharpLeech 2.x.x SiteReader Plugin -->
+
+<!-- Version MUST be in x.x.x.x format! -->
+<SiteReader pluginVersion="2.0.0.0" pluginAuthor="Hyperz">
+	<Settings>
+		<SiteName>ForumW</SiteName>
+		<BaseUrl>http://forumw.org</BaseUrl>
+		<TopicsPerPage>45</TopicsPerPage>
+
+		<!-- Supported type values are: IP.Board 3.1.4+, IP.Board 3.x.x, IP.Board 2.x.x,
+			 vBulletin 4.x.x, vBulletin 3.x.x, phpBB 3.x.x, phpBB 2.x.x -->
+		<Type>phpBB 3.x.x</Type>
+
+		<!-- If unsure choose ISO-8859-1. Except for phpBB 3 boards, they use UTF-8 by default. -->
+		<DefaultEncoding>UTF-8</DefaultEncoding>
+
+		<!-- Set to true if the site uses SEO urls, otherwise false. -->
+		<AllowRedirects>false</AllowRedirects>
+		<UseFriendlyLinks>false</UseFriendlyLinks>
+	</Settings>
+
+	<Sections>
+		<Section title="Applications" id="1" />
+		<Section title="All In One AIO" id="28" />
+		<Section title="Portable Apps" id="68" />
+		<Section title="Games" id="2" />
+		<Section title="Console Games" id="27" />
+		<Section title="Movies" id="3" />
+		<Section title="TV Shows" id="36" />
+		<Section title="Anime" id="35" />
+		<Section title="Music" id="4" />
+		<Section title="Music Videos" id="29" />
+		<Section title="E-books" id="5" />
+		<Section title="AudioBooks" id="65" />
+		<Section title="Tutorials" id="66" />
+		<Section title="Web Developments" id="6" />
+		<Section title="Wallpapers, Images &amp; Screensavers" id="67" />
+		<Section title="Crack Repository" id="50" />
+		<Section title="Non-Windows Stuff" id="7" />
+		<!--<Section title="VIP &amp; Donator's Section" id="21" />-->
+	</Sections>
+
+	<!-- Edit this when the site requires custom parsing -->
+	<Code>
+		<![CDATA[
+		
+		protected override void Init()
+		{
+			base.Init();
+		}
+
+		public override void LoginUser(string username, string password)
+		{
+			base.LoginUser(username, password);
+		}
+
+		public override void LogoutUser()
+		{
+			base.LogoutUser();
+		}
+
+		public override string[] GetTopicUrls(string html)
+		{
+			return base.GetTopicUrls(html);
+		}
+
+		public override SiteTopic GetTopic(string url)
+		{
+			return base.GetTopic(url);
+		}
+
+		public override SiteTopic GetTopic(int topicId)
+		{
+			return base.GetTopic(topicId);
+		}
+		
+		public override HttpWebRequest GetPage(int sectionId, int page, int siteTopicsPerPage)
+		{
+			return base.GetPage(sectionId, page, siteTopicsPerPage);
+		}
+
+		public override void MakeReady(int sectionId)
+		{
+			base.MakeReady(sectionId);
+		}
+		
+		]]>
+	</Code>
+</SiteReader>

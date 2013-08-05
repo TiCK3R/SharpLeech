@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- SharpLeech 2.x.x SiteReader Plugin -->
+
+<!-- Version MUST be in x.x.x.x format! -->
+<SiteReader pluginVersion="2.0.0.0" pluginAuthor="Hyperz">
+	<Settings>
+		<SiteName>Warez-Centre</SiteName>
+		<BaseUrl>http://www.warez-centre.com/forum</BaseUrl>
+		<TopicsPerPage>30</TopicsPerPage>
+
+		<!-- Supported type values are: IP.Board 3.1.4+, IP.Board 3.x.x, IP.Board 2.x.x,
+			 vBulletin 4.x.x, vBulletin 3.x.x, phpBB 3.x.x, phpBB 2.x.x -->
+		<Type>IP.Board 3.x.x</Type>
+
+		<!-- If unsure choose ISO-8859-1. Except for phpBB 3 boards, they use UTF-8 by default. -->
+		<DefaultEncoding>ISO-8859-1</DefaultEncoding>
+
+		<!-- Set to true if the site uses SEO urls, otherwise false. -->
+		<AllowRedirects>true</AllowRedirects>
+		<UseFriendlyLinks>true</UseFriendlyLinks>
+	</Settings>
+
+	<Sections>
+		<Section title="Programs" id="14" />
+		<Section title="Games" id="15" />
+		<Section title="Movies" id="16" />
+		<Section title="Tv Shows" id="65" />
+		<Section title="1 Link Movies" id="30" />
+		<Section title="HD Movies" id="39" />
+		<Section title="Music/Albums" id="17" />
+		<Section title="Templates/Scripts" id="27" />
+		<Section title="Ebooks/Tutorials" id="43" />
+		<Section title="Streaming Media" id="28" />
+		<Section title="Adult (18+)" id="18" />
+		<Section title="Guest Downloads" id="61" />
+		<Section title="Gfx Downloads" id="21" />
+		<Section title="Gfx Tutorials" id="46" />
+		<Section title="Hacking Tutorials" id="62" />
+		<Section title="Hacking Tools" id="63" />
+		<Section title="Exploits" id="26" />
+		<Section title="Account dumps" id="42" />
+	</Sections>
+
+	<!-- Edit this when the site requires custom parsing -->
+	<Code>
+		<![CDATA[
+		
+		protected override void Init()
+		{
+			base.Init();
+		}
+
+		public override void LoginUser(string username, string password)
+		{
+			base.LoginUser(username, password);
+		}
+
+		public override void LogoutUser()
+		{
+			base.LogoutUser();
+		}
+
+		public override string[] GetTopicUrls(string html)
+		{
+			return base.GetTopicUrls(html);
+		}
+
+		public override SiteTopic GetTopic(string url)
+		{
+			return base.GetTopic(url);
+		}
+
+		public override SiteTopic GetTopic(int topicId)
+		{
+			return base.GetTopic(topicId);
+		}
+		
+		public override HttpWebRequest GetPage(int sectionId, int page, int siteTopicsPerPage)
+		{
+			return base.GetPage(sectionId, page, siteTopicsPerPage);
+		}
+
+		public override void MakeReady(int sectionId)
+		{
+			base.MakeReady(sectionId);
+		}
+		
+		]]>
+	</Code>
+</SiteReader>

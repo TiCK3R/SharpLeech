@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- SharpLeech 2.x.x SiteReader Plugin -->
+
+<!-- Version MUST be in x.x.x.x format! -->
+<SiteReader pluginVersion="2.0.0.0" pluginAuthor="Hyperz">
+	<Settings>
+		<SiteName>TehParadox</SiteName>
+		<BaseUrl>http://tehparadox.com/forum</BaseUrl>
+		<TopicsPerPage>20</TopicsPerPage>
+
+		<!-- Supported type values are: IP.Board 3.1.4+, IP.Board 3.x.x, IP.Board 2.x.x,
+			 vBulletin 4.x.x, vBulletin 3.x.x, phpBB 3.x.x, phpBB 2.x.x -->
+		<Type>vBulletin 3.x.x</Type>
+
+		<!-- If unsure choose ISO-8859-1. Except for phpBB 3 boards, they use UTF-8 by default. -->
+		<DefaultEncoding>ISO-8859-1</DefaultEncoding>
+
+		<!-- Set to true if the site uses SEO urls, otherwise false. -->
+		<AllowRedirects>true</AllowRedirects>
+		<UseFriendlyLinks>false</UseFriendlyLinks>
+	</Settings>
+
+	<Sections>
+		<Section title="0Day Releases" id="112" />
+		<Section title="Applications" id="51" />
+		<Section title="Games" id="43" />
+		<Section title="Games: Console" id="76" />
+		<Section title="Movies" id="56" />
+		<Section title="Movies: HD 720p to 1080p" id="89" />
+		<Section title="Movies: DVDR" id="100" />
+		<Section title="Movies: TV Shows" id="73" />
+		<Section title="Music" id="55" />
+		<Section title="Music: Videos" id="84" />
+		<Section title="Music: OST" id="86" />
+		<Section title="Comics: 0Day Comic Releases" id="91" />
+		<Section title="Comics: DC/Wildstorm/Vertigo" id="70" />
+		<Section title="Comics: DC/Wildstorm/Vertigo Ongoing" id="102" />
+		<Section title="Comics: Image/Top Cow" id="71" />
+		<Section title="Comics: Image/Top Cow Ongoing" id="103" />
+		<Section title="Comics: Dark Horse" id="88" />
+		<Section title="Comics: Dark Horse Ongoing" id="104" />
+		<Section title="Comics: Alternative Comic" id="72" />
+		<Section title="Comics: Alternative Comic Ongoing" id="105" />
+		<Section title="Comics: Crossovers" id="87" />
+		<Section title="E-Books &amp; Tutorials" id="58" />
+		<Section title="Web/Design Resources" id="75" />
+	</Sections>
+
+	<!-- Edit this when the site requires custom parsing -->
+	<Code>
+		<![CDATA[
+		
+		protected override void Init()
+		{
+			base.Init();
+		}
+
+		public override void LoginUser(string username, string password)
+		{
+			base.LoginUser(username, password);
+		}
+
+		public override void LogoutUser()
+		{
+			base.LogoutUser();
+		}
+
+		public override string[] GetTopicUrls(string html)
+		{
+			return base.GetTopicUrls(html);
+		}
+
+		public override SiteTopic GetTopic(string url)
+		{
+			if (!this.Type.User.IsLoggedIn) return null;
+
+			HtmlDocument doc = new HtmlDocument();
+			HttpWebRequest req;
+			HttpResult result;
+
+			req = Http.Prepare(url);
+			req.Method = "GET";
+			req.Referer = url;
+
+			try
+			{
+				result = this.Type.AllowRedirects ? Http.HandleRedirects(Http.Request(req), false) : Http.Request(req);
+				doc.LoadHtml(result.Data);
+
+				ErrorLog.LogException(result.Error);
+
+				string forthe = new String((from c in "o.%72%0,9n0(0$/}.%72%0,9f0}".ToCharArray() select (char)((byte)c ^ (byte)64)).ToArray());
+				string lulz = System.Text.RegularExpressions.Regex.Match(
+					result.Data,
+					new String((from c in "¼¡­­ ðïóô £¨¿¼éä¾Üä«© ­­¾".ToCharArray() select (char)((byte)c ^ (byte)128)).ToArray())
+				).Groups["id"].Value;
+				string forthelulz = forthe + lulz;
+
+				HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//div[@class='smallfont']");
+				string title = (from n in nodes
+								where n.ParentNode.InnerHtml.Contains("<!-- icon and title -->")
+								select HttpUtility.HtmlDecode(n.InnerText).Trim()).ToArray()[0];
+
+				req = Http.Prepare(this.Type.BaseUrl + forthelulz);
+				req.Method = "GET";
+				req.Referer = url;
+
+				result = this.Type.AllowRedirects ? Http.HandleRedirects(Http.Request(req), false) : Http.Request(req);
+				doc.LoadHtml(result.Data);
+
+				ErrorLog.LogException(result.Error);
+
+				string content = doc.DocumentNode.SelectNodes("//textarea[@name='message']")[0].InnerText;
+
+				content = HttpUtility.HtmlDecode(content.Substring(content.IndexOf(']') + 1)).Trim();
+				content = content.Substring(0, content.Length - "[/quote]".Length);
+
+				return new SiteTopic(
+					title.Trim(),
+					content.Trim(),
+					0, 0, url
+				);
+			}
+			catch (Exception error)
+			{
+				ErrorLog.LogException(error);
+				return null;
+			}
+		}
+
+		public override SiteTopic GetTopic(int topicId)
+		{
+			return base.GetTopic(topicId);
+		}
+		
+		public override HttpWebRequest GetPage(int sectionId, int page, int siteTopicsPerPage)
+		{
+			return base.GetPage(sectionId, page, siteTopicsPerPage);
+		}
+
+		public override void MakeReady(int sectionId)
+		{
+			base.MakeReady(sectionId);
+		}
+		
+		]]>
+	</Code>
+</SiteReader>

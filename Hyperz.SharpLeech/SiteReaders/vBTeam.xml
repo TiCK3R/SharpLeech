@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- SharpLeech 2.x.x SiteReader Plugin -->
+
+<!-- Version MUST be in x.x.x.x format! -->
+<SiteReader pluginVersion="2.0.0.0" pluginAuthor="Hyperz">
+	<Settings>
+		<SiteName>vBTeam</SiteName>
+		<BaseUrl>http://www.vbteam.info</BaseUrl>
+		<TopicsPerPage>0</TopicsPerPage>
+		
+		<!-- Supported type values are: IP.Board 3.1.4+, IP.Board 3.x.x, IP.Board 2.x.x,
+			 vBulletin 4.x.x, vBulletin 3.x.x, phpBB 3.x.x, phpBB 2.x.x -->
+		<Type>vBulletin 3.x.x</Type>
+		
+		<!-- If unsure choose ISO-8859-1. Except for phpBB 3 boards, they use UTF-8 by default. -->
+		<DefaultEncoding>ISO-8859-1</DefaultEncoding>
+		
+		<!-- Set to true if the site uses SEO urls, otherwise false. -->
+		<AllowRedirects>true</AllowRedirects>
+		<UseFriendlyLinks>true</UseFriendlyLinks>
+	</Settings>
+
+	<Sections>
+		<Section title="vB 4.0 Releases" id="79" />
+		<Section title="vB 4.0 Addons &amp; Template Modifications" id="80" />
+		<Section title="vB 4.0 Free Styles" id="82" />
+		<Section title="vB 4.0 Premium Styles" id="83" />
+		<Section title="vB 4.0 AdminCP Styles" id="84" />
+		<Section title="vB 3.8.X Releases" id="68" />
+		<Section title="vB 3.8.X Addons &amp; Template Modifications" id="69" />
+		<Section title="vB 3.8.x Free Styles" id="71" />
+		<Section title="vB 3.8.x Premium Styles" id="72" />
+		<Section title="vB 3.8.x AdminCP Styles" id="73" />
+		<Section title="vB 3.7.X Releases" id="61" />
+		<Section title="vB 3.7.X Addons &amp; Template Modifications" id="62" />
+		<Section title="vB 3.7.x Free Styles" id="64" />
+		<Section title="vB 3.7.x Premium Styles" id="65" />
+		<Section title="vB 3.7.x AdminCP Styles" id="66" />
+		<Section title="vB 3.6.X Releases" id="13" />
+		<Section title="vB 3.6.X Addons &amp; Template Modifications" id="14" />
+		<Section title="vB 3.6.x Free Styles" id="16" />
+		<Section title="vB 3.6.x Premium Styles" id="17" />
+		<Section title="vB 3.6.x AdminCP Styles" id="18" />
+		<Section title="Compatible Scripts" id="20" />
+		<Section title="Arcade Games" id="21" />
+		<Section title="Language Packs" id="22" />
+		<Section title="vB Graphics" id="23" />
+	</Sections>
+	
+	<!-- Edit this when the site requires custom parsing -->
+	<Code>
+		<![CDATA[
+		
+		protected override void Init()
+		{
+			base.Init();
+		}
+
+		public override void LoginUser(string username, string password)
+		{
+			base.LoginUser(username, password);
+		}
+
+		public override void LogoutUser()
+		{
+			base.LogoutUser();
+		}
+
+		public override string[] GetTopicUrls(string html)
+		{
+			return base.GetTopicUrls(html);
+		}
+
+		// vBTeam hosts the downloads on their site.
+		// Quietly sneak in and grab the attachment link(s).
+		public override SiteTopic GetTopic(string url)
+		{
+			if (!this.Type.User.IsLoggedIn) return null;
+
+			HtmlDocument doc = new HtmlDocument();
+			HttpWebRequest req;
+			HttpResult result;
+
+			req = Http.Prepare(url);
+			req.Method = "GET";
+			req.Referer = url;
+
+			try
+			{
+				result = this.Type.AllowRedirects ? Http.HandleRedirects(Http.Request(req), false) : Http.Request(req);
+				doc.LoadHtml(result.Data);
+
+				if (result.HasError) throw result.Error;
+
+				HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//img[@alt='Reply With Quote']");
+				string link = HttpUtility.HtmlDecode(nodes[0].ParentNode.GetAttributeValue("href", String.Empty));
+
+				nodes = doc.DocumentNode.SelectNodes("//div[@class='smallfont']");
+				string title = (from n in nodes
+								where n.ParentNode.InnerHtml.Contains("<!-- icon and title -->")
+								select HttpUtility.HtmlDecode(n.InnerText).Trim()).ToArray()[0];
+				
+				// Grab attachments
+				nodes = doc.DocumentNode.SelectNodes("//a");
+				var attachments = from n in nodes
+								  where n.GetAttributeValue("href", String.Empty).Contains("vbteam.info/attachments/")
+								  select n.GetAttributeValue("href", String.Empty);
+
+				req = Http.Prepare((link.StartsWith("http:")) ? link : this.Type.BaseUrl + "/" + link);
+				req.Method = "GET";
+				req.Referer = url;
+
+				result = this.Type.AllowRedirects ? Http.HandleRedirects(Http.Request(req), false) : Http.Request(req);
+				doc.LoadHtml(result.Data);
+
+				if (result.HasError) throw result.Error;
+
+				string content = doc.DocumentNode.SelectNodes("//textarea[@name='message']")[0].InnerText;
+
+				content = HttpUtility.HtmlDecode(content.Substring(content.IndexOf(']') + 1)).Trim();
+				content = content.Substring(0, content.Length - "[/quote]".Length);
+				
+				// Add attachments...
+				if (attachments.ToArray().Length > 0)
+				{
+					content += "\n\n[b]Download:[/b]\n[code]";
+					foreach (string attachment in attachments) content += HttpUtility.HtmlDecode(attachment) + "\n";
+					content += "[/code]";
+				}
+
+				return new SiteTopic(
+					title.Trim(),
+					content.Trim(),
+					0, 0, url
+				);
+			}
+			catch (Exception error)
+			{
+				// TODO: log error...
+				return null;
+			}
+		}
+
+		public override SiteTopic GetTopic(int topicId)
+		{
+			string url = this.Type.BaseUrl + String.Format(this.Type.TopicPath, topicId);
+			return this.GetTopic(url);
+		}
+		
+		public override HttpWebRequest GetPage(int sectionId, int page, int siteTopicsPerPage)
+		{
+			return base.GetPage(sectionId, page, siteTopicsPerPage);
+		}
+
+		public override void MakeReady(int sectionId)
+		{
+			base.MakeReady(sectionId);
+		}
+		
+		]]>
+	</Code>
+</SiteReader>

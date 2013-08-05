@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ChatTitleFormat" xml:space="preserve">
+    <value>{0} :: {1}</value>
+  </data>
+  <data name="FileRadioStations" xml:space="preserve">
+    <value>RadioStations.txt</value>
+  </data>
+  <data name="IrcActionMessageFormat" xml:space="preserve">
+    <value>* {0} {1} *</value>
+  </data>
+  <data name="IrcChannel" xml:space="preserve">
+    <value>#Leech</value>
+  </data>
+  <data name="IrcMessageFormat" xml:space="preserve">
+    <value>[{0}] {1}: {2}</value>
+  </data>
+  <data name="IrcNickNameFormat" xml:space="preserve">
+    <value>{0}_{1}</value>
+  </data>
+  <data name="IrcPort" xml:space="preserve">
+    <value>6667</value>
+  </data>
+  <data name="IrcQuitMessage" xml:space="preserve">
+    <value>Closing SharpLeech</value>
+  </data>
+  <data name="IrcRealNameFormat" xml:space="preserve">
+    <value>SLClient {0:x}</value>
+  </data>
+  <data name="IrcServer" xml:space="preserve">
+    <value>irc.dal.net</value>
+  </data>
+  <data name="IrcWelcomeMessage" xml:space="preserve">
+    <value>#  ___  _                   _                   _   
+# / __&gt;| |_  ___  _ _  ___ | |   ___  ___  ___ | |_ 
+# \__ \| . |&lt;_&gt; || '_&gt;| . \| |_ / ._&gt;/ ._&gt;/ | '| . |
+# &lt;___/|_|_|&lt;___||_|  |  _/|___|\___.\___.\_|_.|_|_|
+#                     |_|                           
+# 
+# ==================================================
+#
+# Commands:
+#   /SAY [message]       : sends a message
+#   /ME [action_message] : sends an action message
+#   /CLEAR, /CLR         : clears the chat screen
+# 
+# ==================================================</value>
+  </data>
+  <data name="MsgInvalidValues" xml:space="preserve">
+    <value>Some settings seem to have invalid values.
+Aborting...</value>
+  </data>
+  <data name="MsgLoginFailed" xml:space="preserve">
+    <value>We seem to have a problem logging you in. Make sure your login details are correct and that the target site is online. As an alternative you can try to login via a web browser. However, this is NOT RECOMMENDED!
+
+Would you like to use a web browser to login?</value>
+  </data>
+  <data name="MsgResetSettings" xml:space="preserve">
+    <value>Are you sure you want to reset _all_ settings?</value>
+  </data>
+  <data name="MsgRestartRequired" xml:space="preserve">
+    <value>Some of the settings you changed will only take affect the next time you start SharpLeech.</value>
+  </data>
+  <data name="RadioTitleFormat" xml:space="preserve">
+    <value>{0} Now Bumpin' {1}</value>
+  </data>
+  <data name="WindowTitleFormat" xml:space="preserve">
+    <value>SharpLeech {0} RC1 | AdminSpot.net |</value>
+  </data>
+</root>

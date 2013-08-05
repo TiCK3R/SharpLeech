@@ -1,0 +1,522 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="FormContentType" xml:space="preserve">
+    <value>application/x-www-form-urlencoded</value>
+  </data>
+  <data name="IPBoard_200_ContentTemplate" xml:space="preserve">
+    <value>-----------------------------26919256316738
+Content-Disposition: form-data; name="st"
+
+0
+-----------------------------26919256316738
+Content-Disposition: form-data; name="act"
+
+Post
+-----------------------------26919256316738
+Content-Disposition: form-data; name="s"
+
+
+-----------------------------26919256316738
+Content-Disposition: form-data; name="f"
+
+{2}
+-----------------------------26919256316738
+Content-Disposition: form-data; name="auth_key"
+
+[auth_key]
+-----------------------------26919256316738
+Content-Disposition: form-data; name="removeattachid"
+
+0
+-----------------------------26919256316738
+Content-Disposition: form-data; name="MAX_FILE_SIZE"
+
+10240000000
+-----------------------------26919256316738
+Content-Disposition: form-data; name="CODE"
+
+01
+-----------------------------26919256316738
+Content-Disposition: form-data; name="attach_post_key"
+
+[attach_post_key]
+-----------------------------26919256316738
+Content-Disposition: form-data; name="TopicTitle"
+
+{0}
+-----------------------------26919256316738
+Content-Disposition: form-data; name="TopicDesc"
+
+
+-----------------------------26919256316738
+Content-Disposition: form-data; name="poll_question"
+
+
+-----------------------------26919256316738
+Content-Disposition: form-data; name="ed-0_wysiwyg_used"
+
+0
+-----------------------------26919256316738
+Content-Disposition: form-data; name="editor_ids[]"
+
+ed-0
+-----------------------------26919256316738
+Content-Disposition: form-data; name="Post"
+
+{1}
+-----------------------------26919256316738
+Content-Disposition: form-data; name="enableemo"
+
+yes
+-----------------------------26919256316738
+Content-Disposition: form-data; name="enablesig"
+
+yes
+-----------------------------26919256316738
+Content-Disposition: form-data; name="mod_options"
+
+nowt
+-----------------------------26919256316738
+Content-Disposition: form-data; name="open_time_date"
+
+
+-----------------------------26919256316738
+Content-Disposition: form-data; name="open_time_time"
+
+
+-----------------------------26919256316738
+Content-Disposition: form-data; name="close_time_date"
+
+
+-----------------------------26919256316738
+Content-Disposition: form-data; name="close_time_time"
+
+
+-----------------------------26919256316738
+Content-Disposition: form-data; name="iconid"
+
+{3}
+-----------------------------26919256316738
+Content-Disposition: form-data; name="dosubmit"
+
+Post New Topic
+-----------------------------26919256316738--</value>
+  </data>
+  <data name="IPBoard_200_ContentType" xml:space="preserve">
+    <value>multipart/form-data; boundary=---------------------------26919256316738</value>
+  </data>
+  <data name="IPBoard_200_Login" xml:space="preserve">
+    <value>CookieDate=1&amp;UserName={0}&amp;PassWord={1}</value>
+  </data>
+  <data name="IPBoard_300_ContentTemplate" xml:space="preserve">
+    <value>-----------------------------269432483414243
+Content-Disposition: form-data; name="TopicTitle"
+
+{0}
+-----------------------------269432483414243
+Content-Disposition: form-data; name="TopicDesc"
+
+
+-----------------------------269432483414243
+Content-Disposition: form-data; name="poll_question"
+
+
+-----------------------------269432483414243
+Content-Disposition: form-data; name="ed-0_wysiwyg_used"
+
+0
+-----------------------------269432483414243
+Content-Disposition: form-data; name="editor_ids[]"
+
+ed-0
+-----------------------------269432483414243
+Content-Disposition: form-data; name="Post"
+
+{1}
+-----------------------------269432483414243
+Content-Disposition: form-data; name="enableemo"
+
+yes
+-----------------------------269432483414243
+Content-Disposition: form-data; name="enablesig"
+
+yes
+-----------------------------269432483414243
+Content-Disposition: form-data; name="iconid"
+
+{3}
+-----------------------------269432483414243
+Content-Disposition: form-data; name="st"
+
+0
+-----------------------------269432483414243
+Content-Disposition: form-data; name="app"
+
+forums
+-----------------------------269432483414243
+Content-Disposition: form-data; name="module"
+
+post
+-----------------------------269432483414243
+Content-Disposition: form-data; name="section"
+
+post
+-----------------------------269432483414243
+Content-Disposition: form-data; name="do"
+
+new_post_do
+-----------------------------269432483414243
+Content-Disposition: form-data; name="s"
+
+[s]
+-----------------------------269432483414243
+Content-Disposition: form-data; name="p"
+
+0
+-----------------------------269432483414243
+Content-Disposition: form-data; name="t"
+
+
+-----------------------------269432483414243
+Content-Disposition: form-data; name="f"
+
+{2}
+-----------------------------269432483414243
+Content-Disposition: form-data; name="parent_id"
+
+0
+-----------------------------269432483414243
+Content-Disposition: form-data; name="attach_post_key"
+
+[attach_post_key]
+-----------------------------269432483414243
+Content-Disposition: form-data; name="auth_key"
+
+[auth_key]
+-----------------------------269432483414243
+Content-Disposition: form-data; name="removeattachid"
+
+0
+-----------------------------269432483414243
+Content-Disposition: form-data; name="dosubmit"
+
+Post New Topic
+-----------------------------269432483414243--</value>
+  </data>
+  <data name="IPBoard_300_ContentType" xml:space="preserve">
+    <value>multipart/form-data; boundary=---------------------------269432483414243</value>
+  </data>
+  <data name="IPBoard_300_Login" xml:space="preserve">
+    <value>username={0}&amp;password={1}&amp;rememberMe=1</value>
+  </data>
+  <data name="phpBB_200_ContentTemplate" xml:space="preserve">
+    <value>subject={0}&amp;description=&amp;tag_select=&amp;captcha_code=null&amp;addbbcode18=%23&amp;addbbcode20=12&amp;helpbox=null&amp;message={1}&amp;via=[via]&amp;poll_title=&amp;add_poll_option_text=&amp;poll_length=&amp;captcha_id=null&amp;mode=newtopic&amp;sid=[sid]&amp;f={2}&amp;post_icon={3}&amp;post=Submit</value>
+  </data>
+  <data name="phpBB_200_ContentType" xml:space="preserve">
+    <value>application/x-www-form-urlencoded</value>
+  </data>
+  <data name="phpBB_200_Login" xml:space="preserve">
+    <value>username={0}&amp;password={1}&amp;autologin=on&amp;redirect=&amp;login=Log+in</value>
+  </data>
+  <data name="phpBB_300_ContentTemplate" xml:space="preserve">
+    <value>-----------------------------52261646328134
+Content-Disposition: form-data; name="icon"
+
+{3}
+-----------------------------52261646328134
+Content-Disposition: form-data; name="subject"
+
+{0}
+-----------------------------52261646328134
+Content-Disposition: form-data; name="addbbcode20"
+
+100
+-----------------------------52261646328134
+Content-Disposition: form-data; name="message"
+
+{1}
+-----------------------------52261646328134
+Content-Disposition: form-data; name="lastclick"
+
+[creation_time]
+-----------------------------52261646328134
+Content-Disposition: form-data; name="post"
+
+Submit
+-----------------------------52261646328134
+Content-Disposition: form-data; name="attach_sig"
+
+on
+-----------------------------52261646328134
+Content-Disposition: form-data; name="topic_type"
+
+0
+-----------------------------52261646328134
+Content-Disposition: form-data; name="topic_time_limit"
+
+0
+-----------------------------52261646328134
+Content-Disposition: form-data; name="creation_time"
+
+[creation_time]
+-----------------------------52261646328134
+Content-Disposition: form-data; name="form_token"
+
+[form_token]
+-----------------------------52261646328134
+Content-Disposition: form-data; name="fileupload"; filename=""
+Content-Type: application/octet-stream
+
+
+-----------------------------52261646328134
+Content-Disposition: form-data; name="filecomment"
+
+{2}
+-----------------------------52261646328134
+Content-Disposition: form-data; name="poll_title"
+
+
+-----------------------------52261646328134
+Content-Disposition: form-data; name="poll_option_text"
+
+
+-----------------------------52261646328134
+Content-Disposition: form-data; name="poll_max_options"
+
+1
+-----------------------------52261646328134
+Content-Disposition: form-data; name="poll_length"
+
+0
+-----------------------------52261646328134--</value>
+  </data>
+  <data name="phpBB_300_ContentType" xml:space="preserve">
+    <value>multipart/form-data; boundary=---------------------------52261646328134</value>
+  </data>
+  <data name="phpBB_300_Login" xml:space="preserve">
+    <value>username={0}&amp;password={1}&amp;autologin=on&amp;redirect=index.php&amp;login=Login&amp;redirect=.%2Fucp.php%3Fmode%3Dlogin</value>
+  </data>
+  <data name="SiteReaderExt" xml:space="preserve">
+    <value>.xml</value>
+  </data>
+  <data name="vBulletin_300_ContentTemplate" xml:space="preserve">
+    <value>subject={0}&amp;message={1}&amp;wysiwyg=0&amp;taglist=&amp;iconid={3}&amp;s=&amp;securitytoken=[securitytoken]&amp;f={2}&amp;do=postthread&amp;posthash=&amp;poststarttime=&amp;loggedinuser=[loggedinuser]&amp;sbutton=Submit+New+Thread&amp;parseurl=1&amp;parseame=1&amp;parseame_check=1&amp;emailupdate=9999&amp;polloptions=2</value>
+  </data>
+  <data name="vBulletin_300_ContentType" xml:space="preserve">
+    <value>application/x-www-form-urlencoded</value>
+  </data>
+  <data name="vBulletin_300_Login" xml:space="preserve">
+    <value>cookieuser=1&amp;do=login&amp;vb_login_username={0}&amp;vb_login_password={1}</value>
+  </data>
+  <data name="vBulletin_400_ContentTemplate" xml:space="preserve">
+    <value>subject={0}&amp;message={1}&amp;wysiwyg=0&amp;taglist=&amp;iconid={3}&amp;s=&amp;securitytoken=[securitytoken]&amp;f={2}&amp;do=postthread&amp;posthash=&amp;poststarttime=&amp;loggedinuser=[loggedinuser]&amp;sbutton=Submit+New+Thread&amp;parseurl=1&amp;parseame=1&amp;parseame_check=1&amp;emailupdate=9999&amp;polloptions=2</value>
+  </data>
+  <data name="vBulletin_400_ContentType" xml:space="preserve">
+    <value>application/x-www-form-urlencoded</value>
+  </data>
+  <data name="vBulletin_400_Login" xml:space="preserve">
+    <value>vb_login_username={0}&amp;vb_login_password={1}&amp;cookieuser=1&amp;s=&amp;securitytoken=guest&amp;do=login&amp;vb_login_md5password={2}&amp;vb_login_md5password_utf={3}</value>
+  </data>
+  <data name="SiteReaderTemplate" xml:space="preserve">
+    <value>namespace Hyperz.SharpLeech.SiteReaders
+{
+	public class [__CLASS__] : SiteReader
+	{
+		public [__CLASS__](string siteName,
+						   string baseUrl,
+						   string siteTypeName,
+						   int topicsPerPage,
+						   Dictionary&lt;string, int&gt; sections,
+						   string defaultEncoding = "",
+						   bool allowRedirects = false,
+						   bool useFriendlyLinks = false)
+			: base(siteName, baseUrl, siteTypeName, topicsPerPage, sections,
+				   defaultEncoding, allowRedirects, useFriendlyLinks)
+		{ }
+		
+		[__CODE__]
+	}
+}</value>
+  </data>
+  <data name="SiteReaderTemplateHeader" xml:space="preserve">
+    <value>using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Linq;
+using Hyperz.SharpLeech.Engine;
+using Hyperz.SharpLeech.Engine.Html;
+using Hyperz.SharpLeech.Engine.Net;
+
+using Res = Hyperz.SharpLeech.Engine.Properties.Resources;
+
+
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+[assembly: System.Reflection.AssemblyTitle("SharpLeech 2 [__NAME__] Plugin")]
+[assembly: System.Reflection.AssemblyDescription("SharpLeech 2 [__NAME__] Plugin")]
+[assembly: System.Reflection.AssemblyConfiguration("")]
+[assembly: System.Reflection.AssemblyCompany("[__AUTHOR__]")]
+[assembly: System.Reflection.AssemblyProduct("SharpLeech 2 [__NAME__] Plugin")]
+[assembly: System.Reflection.AssemblyCopyright("Copyright © [__AUTHOR__]2008 - 2010")]
+[assembly: System.Reflection.AssemblyTrademark("")]
+[assembly: System.Reflection.AssemblyCulture("")]
+
+// Setting ComVisible to false makes the types in this assembly not visible 
+// to COM components.  If you need to access a type in this assembly from 
+// COM, set the ComVisible attribute to true on that type.
+[assembly: System.Runtime.InteropServices.ComVisible(false)]
+
+// The following GUID is for the ID of the typelib if this project is exposed to COM
+//[assembly: System.Runtime.InteropServices.Guid("")]
+
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Build and Revision Numbers 
+// by using the '*' as shown below:
+// [assembly: AssemblyVersion("1.0.*")]
+[assembly: System.Reflection.AssemblyVersion("[__VERSION__]")]
+[assembly: System.Reflection.AssemblyFileVersion("[__VERSION__]")]</value>
+  </data>
+  <data name="UserAgentFormat" xml:space="preserve">
+    <value>Mozilla/5.0 (Windows; N; {0}; 64Bit:{1}; .NET CLR {2}) SLEngine/{3} SharpLeech/2.x.x</value>
+  </data>
+  <data name="ErrorLogTemplate" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;!-- AUTO GENERATED ERROR LOG --&gt;
+
+&lt;Errors&gt;&lt;/Errors&gt;</value>
+  </data>
+  <data name="IPBoard_314_Login" xml:space="preserve">
+    <value>auth_key={2}&amp;referer={3}&amp;username={0}&amp;password={1}&amp;rememberMe=1</value>
+  </data>
+</root>

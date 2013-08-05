@@ -1,0 +1,39 @@
+﻿<Window x:Class="Hyperz.SharpLeech.ManualLoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        Title="Manual Login" Height="480" Width="640"
+        VisualBitmapScalingMode="NearestNeighbor" VisualTextRenderingMode="ClearType"
+        VisualTextHintingMode="Fixed" VisualClearTypeHint="Enabled" SnapsToDevicePixels="True"
+        TextOptions.TextFormattingMode="Display" MinHeight="480" MinWidth="640" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border BorderThickness="1" Background="#FFFFFFD1" BorderBrush="#FFE2E285">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Image Source="Images/tabAbout.png" Width="16" Margin="5" VerticalAlignment="Center" />
+
+                <TextBlock Margin="5" Grid.Column="1">
+                    Please use the browser to login and click the <Italic>"Logged In"</Italic> button when done.<LineBreak />
+                    <Bold>Note:</Bold> when using Manual Login there's no way to guarantee that the leeching will work...
+                </TextBlock>
+
+                <Button x:Name="btnLoggedIn" Content="Logged In" Margin="5" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right"
+                        Click="btnLoggedIn_Click" TabIndex="3" />
+            </Grid>
+        </Border>
+
+        <WindowsFormsHost x:Name="wfh" Grid.Row="1" TabIndex="2">
+            <wf:WebBrowser x:Name="wbLogin" TabIndex="1" />
+        </WindowsFormsHost>
+    </Grid>
+</Window>

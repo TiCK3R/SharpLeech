@@ -1,0 +1,355 @@
+﻿<Window x:Class="Hyperz.SharpLeech.AdvancedWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:cfg="clr-namespace:Hyperz.SharpLeech.Properties"
+        xmlns:ctrl="clr-namespace:Hyperz.SharpLeech.Controls"
+        Title="Advanced Settings" Height="374" Width="442" ResizeMode="NoResize"
+        Background="{Binding Source={StaticResource WindowBackgroundBrush}}"
+        SnapsToDevicePixels="True" UseLayoutRounding="True"
+        VisualClearTypeHint="Enabled" VisualBitmapScalingMode="NearestNeighbor"
+        TextOptions.TextFormattingMode="Display" WindowStartupLocation="CenterOwner"
+        VisualTextRenderingMode="ClearType" VisualTextHintingMode="Fixed" Loaded="Window_Loaded">
+    <Window.Resources>
+        <!--<cfg:Settings x:Key="Cfg" />-->
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TabControl x:Name="tabMain" Margin="3">
+            <TabItem x:Name="tabPostSettings" Header="Post &amp; Leech" MinHeight="25">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    
+                    <GroupBox Margin="3" Header="Main Settings">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="100" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Margin="3" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">
+                                Maximum # of pages to leech (0 = unlimited)
+                            </TextBlock>
+                            <TextBox x:Name="txtMaxLeechPages" Margin="3" Grid.Row="0" MaxLength="7" Grid.Column="1"
+                                     Text="{Binding Source={x:Static cfg:Settings.Default}, Path=PageMax, Mode=TwoWay}" />
+
+                            <TextBlock Margin="3" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">
+                                Leeching direction
+                            </TextBlock>
+                            <ComboBox x:Name="cbLeechDirection" Margin="3" Grid.Row="1" Grid.Column="1" IsReadOnly="True"
+                                      SelectedIndex="{Binding Source={x:Static cfg:Settings.Default}, Path=LeechDirection, Mode=TwoWay}">
+                                <ComboBoxItem Content="New -&gt; Old" />
+                                <ComboBoxItem Content="Old -&gt; New" />
+                            </ComboBox>
+
+                            <TextBlock Margin="3" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0">
+                                Enable topic content regular expresssions
+                            </TextBlock>
+                            <CheckBox x:Name="chkContentRegex" Margin="3" Padding="0,3,0,3" Grid.Row="2" Grid.Column="1"
+                                      IsChecked="{Binding Source={x:Static cfg:Settings.Default}, Path=EnableContentRegex, Mode=TwoWay}" />
+
+                            <TextBlock Margin="3" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0">
+                                Enable topic title regular expresssions
+                            </TextBlock>
+                            <CheckBox x:Name="chkTitleRegex" Margin="3" Padding="0,3,0,3" Grid.Row="3" Grid.Column="1"
+                                      IsChecked="{Binding Source={x:Static cfg:Settings.Default}, Path=EnableTitleRegex, Mode=TwoWay}" />
+
+                            <TextBlock Margin="3" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0">
+                                Add personal message in topics
+                            </TextBlock>
+                            <ComboBox x:Name="cbAddMessage" Margin="3" Grid.Row="4" Grid.Column="1" IsReadOnly="True"
+                                      SelectedIndex="{Binding Source={x:Static cfg:Settings.Default}, Path=AddPersonalMessage, Mode=TwoWay}">
+                                <ComboBoxItem Content="No" />
+                                <ComboBoxItem Content="At Bottom" />
+                                <ComboBoxItem Content="At Top" />
+                            </ComboBox>
+                        </Grid>
+                    </GroupBox>
+                    
+                    <GroupBox Margin="3" Header="Personal Message" Grid.Row="1">
+                        <TextBox x:Name="txtPersonalMessage" Margin="3" AcceptsReturn="True" MaxLength="1000"
+                                 VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" FontFamily="Courier New"
+                                 Text="{Binding Source={x:Static cfg:Settings.Default}, Path=PersonalMessage, Mode=TwoWay}" />
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="tabRegex" Header="Regular Expressions" MinHeight="25">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="50*" />
+                        <RowDefinition Height="50*" />
+                    </Grid.RowDefinitions>
+
+                    <Border Margin="3" BorderThickness="1" Background="#FFFFFFD1" BorderBrush="#FFEBEBA3">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="Images/tabAbout.png" Margin="3,0,3,0" Stretch="None" VerticalAlignment="Center" />
+
+                            <TextBlock Margin="3" VerticalAlignment="Center" Grid.Column="1">
+                                You can find a basic <Hyperlink x:Name="lnkRegex">regex</Hyperlink> tutorial 
+                                <Hyperlink x:Name="lnkTutorial">here</Hyperlink> 
+                                and a handy tool <Hyperlink x:Name="lnkTool">here</Hyperlink>.<LineBreak />
+                                SharpLeech will remove all matches.
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+
+                    <GroupBox Margin="3" Padding="0" Grid.Row="1">
+                        <GroupBox.Header>
+                            <Span>
+                                Topic Title Regular Expressions 
+                                (One <Italic>regex</Italic> per line, pl0x!)
+                            </Span>
+                        </GroupBox.Header>
+
+                        <TextBox x:Name="txtTopicTitleRegex" Margin="3" AcceptsReturn="True" Grid.Row="1"
+                                 VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" FontFamily="Courier New"
+                                 Text="{Binding Source={x:Static cfg:Settings.Default}, Path=TitleRegex, Mode=TwoWay}" />
+                    </GroupBox>
+
+                    <GroupBox Margin="3" Padding="0" Grid.Row="2">
+                        <GroupBox.Header>
+                            <Span>
+                                Topic Content Regular Expressions
+                                (One
+                                <Italic>regex</Italic> per line, pl0x!)
+                            </Span>
+                        </GroupBox.Header>
+
+                        <TextBox x:Name="txtTopicContentRegex" Margin="3" AcceptsReturn="True" Grid.Row="1"
+                                 VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" FontFamily="Courier New"
+                                 Text="{Binding Source={x:Static cfg:Settings.Default}, Path=ContentRegex, Mode=TwoWay}" />
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="tabRadioChatSettings" Header="Radio &amp; Chat" MinHeight="25">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <GroupBox Margin="3" Header="Settings">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="120" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Margin="3" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">
+                                ChatBox nickname (<Bold>no spaces</Bold>)
+                            </TextBlock>
+                            <TextBox x:Name="txtNickname" Margin="3" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" MaxLength="25"
+                                     Text="{Binding Source={x:Static cfg:Settings.Default}, Path=IrcNickname, Mode=TwoWay}" TextChanged="txtNickname_TextChanged" />
+
+                            <TextBlock Margin="3" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">
+                                Show extra info in the main title bar
+                            </TextBlock>
+                            <ComboBox x:Name="cbTitleBarInfo" Margin="3" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"
+                                      SelectedIndex="{Binding Source={x:Static cfg:Settings.Default}, Path=TitlebarInfo, Mode=TwoWay}">
+                                <ComboBoxItem Content="No" />
+                                <ComboBoxItem Content="iRadio" />
+                                <ComboBoxItem Content="ChatBox" />
+                            </ComboBox>
+
+                            <TextBlock Margin="3" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0">
+                                Log ChatBox conversations before exiting
+                            </TextBlock>
+                            <CheckBox x:Name="checkLogChat" Margin="3" Padding="0" Height="21" VerticalContentAlignment="Center"
+                                      VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"
+                                      IsChecked="{Binding Path=LogChatbox, Source={x:Static cfg:Settings.Default}, Mode=TwoWay}" />
+
+                            <TextBlock Margin="3" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" IsEnabled="False">
+                                Enable remote IRC diagnostics
+                            </TextBlock>
+                            <CheckBox x:Name="checkDiagnostics" Margin="3" Padding="0" Height="21" VerticalContentAlignment="Center"
+                                      VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" IsEnabled="False"
+                                      IsChecked="{Binding Path=RemoteDiagnostics, Source={x:Static cfg:Settings.Default}, Mode=TwoWay}" />
+
+                            <TextBlock Margin="3" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0">
+                                Default ChatBox server
+                            </TextBlock>
+                            <ComboBox x:Name="cbServer" Margin="3" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" SelectedValuePath="Content"
+                                      SelectedValue="{Binding Source={x:Static cfg:Settings.Default}, Path=IrcServer, Mode=TwoWay}"
+                                      SelectionChanged="cbServer_SelectionChanged">
+                                <ComboBoxItem Content="irc.dal.net" />
+                                <ComboBoxItem Content="aqua.se.eu.dal.net" />
+                                <ComboBoxItem Content="arcor.de.eu.dal.net" />
+                                <ComboBoxItem Content="Atlanta.ga.us.dal.net" />
+                                <ComboBoxItem Content="brain.hub.eu.dal.net" />
+                                <ComboBoxItem Content="broadway.ny.us.dal.net" />
+                                <ComboBoxItem Content="diamond.hub.dal.net" />
+                                <ComboBoxItem Content="gaston.se.eu.dal.net" />
+                                <ComboBoxItem Content="global.hub.dal.net" />
+                                <ComboBoxItem Content="hollywood.ix.us.dal.net" />
+                                <ComboBoxItem Content="hoon.ix.au.dal.net" />
+                                <ComboBoxItem Content="hope.ix.us.dal.net" />
+                                <ComboBoxItem Content="hotspeed.sg.as.dal.net" />
+                                <ComboBoxItem Content="jade.fl.us.dal.net" />
+                                <ComboBoxItem Content="jingo.ix.us.dal.net" />
+                                <ComboBoxItem Content="krypt.ca.us.dal.net" />
+                                <ComboBoxItem Content="maple.ix.ca.dal.net" />
+                                <ComboBoxItem Content="masters.ix.us.dal.net" />
+                                <ComboBoxItem Content="matrix.de.eu.dal.net" />
+                                <ComboBoxItem Content="mozilla.se.eu.dal.net" />
+                                <ComboBoxItem Content="ninja.hub.dal.net" />
+                                <ComboBoxItem Content="novel.ix.us.dal.net" />
+                                <ComboBoxItem Content="oi.ix.au.dal.net" />
+                                <ComboBoxItem Content="oper2-e.dal.net" />
+                                <ComboBoxItem Content="powertech.no.eu.dal.net" />
+                                <ComboBoxItem Content="punch.va.us.dal.net" />
+                                <ComboBoxItem Content="rangers.ix.us.dal.net" />
+                                <ComboBoxItem Content="rapport.ix.us.dal.net" />
+                                <ComboBoxItem Content="redemption.ix.us.dal.net" />
+                                <ComboBoxItem Content="renew.hub.dal.net" />
+                                <ComboBoxItem Content="serenity.ix.us.dal.net" />
+                                <ComboBoxItem Content="serverbuffet.wa.us.dal.net" />
+                                <ComboBoxItem Content="soho.ix.us.dal.net" />
+                                <ComboBoxItem Content="swiftco.wa.us.dal.net" />
+                                <ComboBoxItem Content="toronto.on.ca.dal.net" />
+                                <ComboBoxItem Content="tranquility.hub.dal.net" />
+                                <ComboBoxItem Content="valhall.no.eu.dal.net" />
+                            </ComboBox>
+                        </Grid>
+                    </GroupBox>
+                    
+                    <GroupBox Margin="3" Header="iRadio Volume" Grid.Row="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Margin="3" VerticalAlignment="Center" Width="72"
+                                       Text="{Binding ElementName=sliderVolume, Path=Value, StringFormat=Volume: \{0:N0\}}" />
+                            
+                            <Slider x:Name="sliderVolume" Margin="3" VerticalAlignment="Center" Grid.Column="1" Maximum="100"
+                                    LargeChange="10" SmallChange="1" Value="{Binding Source={x:Static cfg:Settings.Default}, Path=RadioVolume, Mode=TwoWay}" />
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="tabOtherSettings" Header="Other" MinHeight="25">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <GroupBox Margin="3" Header="Remaining Settings" Grid.RowSpan="2">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="120" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Margin="3" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">
+                                Global debugging level (n/a yet)
+                            </TextBlock>
+                            <ComboBox x:Name="cbDebugging" Margin="3" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"
+                                      IsEnabled="False" SelectedIndex="{Binding Source={x:Static cfg:Settings.Default}, Path=Debugging, Mode=TwoWay}">
+                                <ComboBoxItem Content="Minimal" />
+                                <ComboBoxItem Content="Extensive" />
+                            </ComboBox>
+
+                            <TextBlock Margin="3" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">
+                                Enable date-related events (n/a yet)
+                            </TextBlock>
+                            <CheckBox x:Name="checkDate" Margin="3" Padding="0" Height="21" VerticalContentAlignment="Center"
+                                      VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" IsEnabled="False"
+                                      IsChecked="{Binding Source={x:Static cfg:Settings.Default}, Path=EnableDateEvents, Mode=TwoWay}" />
+
+                            <TextBlock Margin="3" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0">
+                                Enable Aero interface (requires Vista or higher)
+                            </TextBlock>
+                            <CheckBox x:Name="checkAero" Margin="3" Padding="0" Height="21" VerticalContentAlignment="Center"
+                                      VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"
+                                      IsChecked="{Binding Path=EnableAeroInterface, Source={x:Static cfg:Settings.Default}, Mode=TwoWay}"
+                                      Checked="checkAero_Checked" Unchecked="checkAero_Checked" />
+
+                            <TextBlock Margin="3" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0">
+                                Enable Windows 7 features
+                            </TextBlock>
+                            <CheckBox x:Name="checkWin7" Margin="3" Padding="0" Height="21" VerticalContentAlignment="Center"
+                                      VerticalAlignment="Center" Grid.Row="3" Grid.Column="1"
+                                      IsChecked="{Binding Source={x:Static cfg:Settings.Default}, Path=EnableWin7Futures, Mode=TwoWay}"
+                                      Checked="checkWin7_Checked" Unchecked="checkWin7_Checked" />
+
+                            <TextBlock Margin="3" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0">
+                                Enable custom UI themes (n/a yet)
+                            </TextBlock>
+                            <CheckBox x:Name="checkThemes" Margin="3" Padding="0" Height="21" VerticalContentAlignment="Center"
+                                      VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" IsEnabled="False"
+                                      IsChecked="{Binding Source={x:Static cfg:Settings.Default}, Path=EnableCustomThemes, Mode=TwoWay}" />
+
+                            <TextBlock Margin="3" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0">
+                                Enable loading screen at startup (splash screen)
+                            </TextBlock>
+                            <CheckBox x:Name="checkSplash" Margin="3" Padding="0" Height="21" VerticalContentAlignment="Center"
+                                      VerticalAlignment="Center" Grid.Row="5" Grid.Column="1"
+                                      IsChecked="{Binding Source={x:Static cfg:Settings.Default}, Path=EnableSplash, Mode=TwoWay}" />
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btnRestoreDefaults" Margin="3" Content="Restore Defaults" Click="btnRestoreDefaults_Click" />
+            <Button x:Name="btnSave" Margin="3" Content="Save" Grid.Column="2" Click="btnSave_Click" />
+            <Button x:Name="btnCancel" Margin="3" Content="Cancel" Grid.Column="3" Click="btnCancel_Click" />
+        </Grid>
+    </Grid>
+</Window>

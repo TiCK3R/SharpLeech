@@ -1,0 +1,55 @@
+﻿// SharpLeech Radio Stations List
+// 
+// You can add radio stations, playlists or even mp3's here.
+// 
+// MP3 Examples:
+// AUDIO; Artist - Title; C:\path\to\song.mp3
+// AUDIO; Artist - Title; http://site.com/path/to/song.mp3
+// 
+// Playlist Examples:
+// AUDIO; Playlist Title; C:\path\to\playlist.m3u
+// AUDIO; Playlist Title; http://site.com/path/to/playlist.m3u
+// 
+// Radio Station Example:
+// See list below ;)
+//
+// ==  FORMAT: ====================================================================
+// [A/V];	[NAME/TITLE];					[URL/PATH]
+// ================================================================================
+
+AUDIO;		Hot 108 Jamz [RnB];				http://www.hot108.com/hot108jamz.asx
+AUDIO;		After Hours DJ's [DANCE];		http://ahdjs.net/ahdjs128.m3u
+AUDIO;		1Power [URBAN];					http://www.powerhitz.com/powerhitz1.asx
+AUDIO;		.977 The Hitz [POP];			http://www.977music.com/tunein/web/hitz.asx
+AUDIO;		Galaxy 105 [POP];				http://mediaweb.musicradio.com/show.asx?StreamID=162
+AUDIO;		Defjay.com [URBAN];				http://www.defjay.com/listen.asx
+AUDIO;		SLAM!FM [NL] [POP];				http://www.true.nl/streams/slamfmlivestream.asx
+AUDIO;		Ragga Kings [DANCEHALL];		http://www.raggakings.net/listen.wax
+AUDIO;		RockRadio1.com [ROCK];			http://www.rockradio1.com/192kwma.asx
+AUDIO;		Rasta Music 24/7 [REGGAE];		http://azul.streamguys.com/rastamusic
+AUDIO;		1FM Top 40 [POP];				http://top40.1.fm/top40128k
+AUDIO;		1FM 90's [POP];					http://90s.1.fm/1fm90s128k?pid=10161
+AUDIO;		1FM 80's [POP];					http://80s.1.fm/energy80s128k
+AUDIO;		High Voltage [METAL];			http://hv.1.fm/highvoltage128k
+//VIDEO;		NRJ Hits [FR] [POP];			http://wwitv.com/tv_stream/b4212.asx
+//VIDEO;		NRJ Dance [FR] [DANCE];			http://wwitv.com/tv_stream/b4308.asx
+//VIDEO;		NRJ Groove [FR] [URBAN];		http://wwitv.com/tv_stream/b4309.asx
+VIDEO;		MusicBox [SK] [POP];			http://81.89.49.210/musicbox
+//VIDEO;		RMF MAXXX TV [PL] [POP];		http://www.rmfmaxxx.pl/tv400.wpl
+VIDEO;		Dance TV [HU] [POP];			mms://stream02.gtk.hu/dance_tvd
+//VIDEO;		Play TV [SL] [POP];				mms://93.103.4.16/playtv
+//VIDEO;		NRJ Pop Rock [FR] [ROCK];		http://wwitv.com/tv_stream/b4310.asx
+//VIDEO;		Streetclip TV [DE] [METAL];		http://wwitv.com/tv_stream/b2426.asx
+VIDEO;		Ibiza TV [SP] [???];			mms://81.174.67.45/ibizaontv
+//VIDEO;		Seven Casting TV [FR] [???];	mms://91.121.179.127/sbeaute
+//VIDEO;		MLC TV [DE] [POP];				http://wwitv.com/tv_stream/b4357.asx
+VIDEO;		HDTV1.cz [CZ] [???];			http://stream.hdtv1.cz/hdtv1.asx
+//VIDEO;		HipHop TV [BG] [URBAN];			http://wwitv.com/tv_stream/b4448.asx
+VIDEO;		C.M.S. [RU] [POP];				mms://85.21.138.210/mclips4
+VIDEO;		Mad TV [BG] [POP];				mms://195.149.254.227:8080
+VIDEO;		Soleil TV [FR] [???];			http://www.soleiltv.com/antilles12.asx
+VIDEO;		Disco 80's TV [RU] [DISCO];		http://www.disco80.ru/discotv.php
+
+// ================================================================================
+// EoF
+// ================================================================================
