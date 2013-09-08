@@ -251,6 +251,12 @@
                                             <TextBlock Margin="2" Text="{Binding RelativeSource={RelativeSource Self}, Path=Parent.Parent.Tag}" />
                                         </StackPanel>
 									</ListBoxItem>
+									<ListBoxItem Tag="IP.Board 3.4.x">
+										<StackPanel Orientation="Horizontal">
+											<Image Source="Images/IPBoard.png" Margin="2" Width="16" />
+											<TextBlock Margin="2" Text="{Binding RelativeSource={RelativeSource Self}, Path=Parent.Parent.Tag}" />
+										</StackPanel>
+									</ListBoxItem>
 									<ListBoxItem Tag="IP.Board 3.1.4+">
 										<StackPanel Orientation="Horizontal">
 											<Image Source="Images/IPBoard.png" Margin="2" Width="16" />
@@ -569,14 +575,18 @@
                     <GroupBox Margin="3" Header="SharpLeech Release Notes" Grid.RowSpan="2">
                         <TextBlock Margin="3" TextWrapping="Wrap">
                             <Span>
-                                Nothing new to report...
+                                Added initial IP.Board 3.4.x support.
+								Note that logging in to an IPB 3.4 site using "IP.Board 3.1.4+" will also work.
+								However, posting and leeching using the IPB 3.1.4 profile will likely NOT work on IPB 3.4 sites.
                                 <LineBreak /><LineBreak />
                                 <Bold>Special Thanks:</Bold><LineBreak />
                                 chukky
                                 <LineBreak /><LineBreak />
                                 <Bold>The Interwebs:</Bold><LineBreak />
                                 - Home page -> 
-                                <Hyperlink Tag="https://github.com/Hyperz/SharpLeech" Click="Hyperlink_Click">SharpLeech @ GitHub.com</Hyperlink>
+                                <Hyperlink Tag="https://github.com/Hyperz/SharpLeech" Click="Hyperlink_Click">SharpLeech @ GitHub.com</Hyperlink><LineBreak />
+                                - Download latest version -> 
+                                <Hyperlink Tag="https://github.com/Hyperz/SharpLeech/releases" Click="Hyperlink_Click">Releases</Hyperlink>
                                 <LineBreak /><LineBreak />
                                 Thanks for using SharpLeech (:
                             </Span>

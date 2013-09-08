@@ -28,6 +28,7 @@ namespace Hyperz.SharpLeech.Engine
 			_siteTypes.Add(new SiteType_IPBoard_200());		// IPB 2
 			_siteTypes.Add(new SiteType_IPBoard_300());		// IPB 3
 			_siteTypes.Add(new SiteType_IPBoard_314());		// IPB 3.1.4+
+			_siteTypes.Add(new SiteType_IPBoard_340());		// IPB 3.4.x
 			_siteTypes.Add(new SiteType_vBulletin_300());	// vB 3
 			_siteTypes.Add(new SiteType_vBulletin_400());	// vB 4
 			_siteTypes.Add(new SiteType_phpBB_200());		// phpBB 2
@@ -958,7 +959,7 @@ namespace Hyperz.SharpLeech.Engine
 					auth.GetAttributeValue("value", ""),
 					HttpUtility.UrlEncode(this.BaseUrl + loginPath, this.SiteEncoding)
 				);
-				
+
 				byte[] rawData = this.SiteEncoding.GetBytes(data);
 				int check = 0;
 				int parse = -1;
@@ -1215,6 +1216,398 @@ namespace Hyperz.SharpLeech.Engine
 				ErrorLog.LogException(result.Error);
 
 				string title = (from n in doc.DocumentNode.SelectNodes("//h2[@class='maintitle']")
+								where n.InnerText.Trim().Contains("Replying to ")
+								select n.InnerText.Replace("Replying to ", "")).ToArray()[0];
+				string content = doc.DocumentNode.SelectNodes("//textarea[@name='Post']")[0].InnerText;
+
+				content = HttpUtility.HtmlDecode(content.Substring(content.IndexOf(']') + 1)).Trim();
+				content = content.Substring(0, content.Length - "[/quote]".Length);
+
+				// Fix IPB3 quotes
+				string pattern = @"(?i)\[quote [\w\d " + '"' + @"'-=]+\]";
+				string replace = "[quote]";
+
+				content = Regex.Replace(content, pattern, replace);
+
+				return new SiteTopic(
+					HttpUtility.HtmlDecode(title).Trim(),
+					content.Trim(),
+					0, 0, url
+				);
+			}
+			catch (Exception error)
+			{
+				ErrorLog.LogException(error);
+				return null;
+			}
+		}
+
+		public override SiteTopic GetTopic(int topicId)
+		{
+			string url = this.BaseUrl + String.Format(this.TopicPath, topicId);
+
+			return this.GetTopic(url);
+		}
+
+		public override string[] GetTopicUrls(string html)
+		{
+			if (html == null || html.Trim().Length == 0) return new string[0];
+
+			var urls = new List<string>();
+			var doc = new HtmlDocument();
+			HtmlNodeCollection nodes;
+			Uri uri;
+
+			try
+			{
+				doc.LoadHtml(html);
+
+				nodes = doc.DocumentNode.SelectNodes("//a[@class='topic_title']");
+				var anchors = from n in nodes
+							  where !n.ParentNode.InnerHtml.Contains("class=\"topic_prefix\"") &&
+									n.GetAttributeValue("id", "").StartsWith("tid-link-") &&
+									n.GetAttributeValue("href", "").StartsWith("http:")
+							  select HttpUtility.HtmlDecode(n.GetAttributeValue("href", "")).Trim();
+
+				//throw new Exception(anchors.ToArray().Length.ToString());
+
+				foreach (string a in anchors)
+				{
+					if (Uri.TryCreate(a, UriKind.Absolute, out uri)) urls.Add(a);
+				}
+
+				return urls.ToArray();
+			}
+			catch (Exception error)
+			{
+				ErrorLog.LogException(error);
+				return new string[0];
+			}
+		}
+	}
+
+	internal class SiteType_IPBoard_340 : SiteType
+	{
+		public override string PagePath
+		{
+			get
+			{
+				return (this.UseFriendlyLinks) ? base.PagePath : "/index.php?" + base.PagePath;
+			}
+			set
+			{
+				base.PagePath = value;
+			}
+		}
+
+		public override string TopicPath
+		{
+			get
+			{
+				return (this.UseFriendlyLinks) ? base.TopicPath : "/index.php?" + base.TopicPath;
+			}
+			set
+			{
+				base.TopicPath = value;
+			}
+		}
+
+		public SiteType_IPBoard_340()
+		{
+			this.Name = "IP.Board 3.4.x";
+			this.BaseUrl = "";
+			this.Details = new SiteTypeDetails(Res.IPBoard_300_ContentTemplate, Res.IPBoard_300_ContentType);
+			this.LoginPath = "/index.php?app=core&module=global&section=login&do=process";
+			this.NewTopicPath = "/index.php?app=forums&module=post&section=post&do=new_post&f={0}";
+			this.PagePath = "/forum/{0}-null/page__prune_day__100__sort_by__Z-A__sort_key__last_post__topicfilter__all__st__{1}";
+			this.TopicPath = "/topic/{0}-null/";
+			this.RegisterPath = "/index.php?app=core&module=global&section=register";
+			this.AllowRedirects = false;
+			this.UseFriendlyLinks = false;
+			this.SiteEncoding = Encoding.GetEncoding("UTF-8");
+			this.User = SiteLoginDetails.Empty;
+			this.TemplateReplacements = new Dictionary<string, string>();
+		}
+
+		public override void LoginUser(string username, string password)
+		{
+			AsyncHelper.Run(() =>
+			{
+				var loginPath = "/index.php?app=core&module=global&section=login";
+				var html = Http.Get(this.BaseUrl + loginPath).Data;
+				var doc = new HtmlDocument();
+
+				doc.LoadHtml(html);
+
+				var auth = doc.DocumentNode.SelectSingleNode("//input[@name='auth_key']");
+
+
+				string url = this.BaseUrl + this.LoginPath;
+				var details = new SiteLoginDetails(false, username, password);
+				var data = String.Format(
+					Res.IPBoard_314_Login,
+					details.GetUrlSafeUsername(this.SiteEncoding),
+					details.GetUrlSafePassword(this.SiteEncoding),
+					auth.GetAttributeValue("value", ""),
+					HttpUtility.UrlEncode(this.BaseUrl + loginPath, this.SiteEncoding)
+				);
+
+				byte[] rawData = this.SiteEncoding.GetBytes(data);
+				int check = 0;
+				int parse = -1;
+
+				this.LogoutUser();
+
+				HttpWebRequest req = Http.Prepare(url);
+				Stream stream;
+
+				req.Method = "POST";
+				req.Referer = url;
+				req.ContentType = Res.FormContentType;
+				req.ContentLength = rawData.Length;
+
+				stream = req.GetRequestStream();
+				stream.Write(rawData, 0, rawData.Length);
+				stream.Close();
+
+				HttpResult result = this.AllowRedirects ? Http.HandleRedirects(Http.Request(req), true) : Http.Request(req);
+
+				// Did the request fail?
+				if (result.HasError || Http.SessionCookies.Count < 2)
+				{
+					ErrorLog.LogException(result.Error);
+					this.User = details;
+					this.OnLogin(this, new LoginEventArgs(details));
+					return;
+				}
+
+				if (result.HasResponse) this.SiteEncoding = Encoding.GetEncoding(result.Response.CharacterSet);
+
+				// Check if we did login
+				foreach (Cookie c in Http.GetDomainCookies(req.RequestUri))
+				{
+					if (c.Name.EndsWith("member_id"))
+					{
+						if (c.Value.Length > 0 && int.TryParse(c.Value, out parse) && parse > 0) check++;
+					}
+					else if (c.Name.EndsWith("pass_hash"))
+					{
+						if (c.Value.Length > 1) check++;
+					}
+				}
+
+				if (check > 1)
+				{
+					details.IsLoggedIn = true;
+
+					foreach (var c in Http.GetDomainCookies(req.RequestUri))
+					{
+						details.Cookies.Add(c);
+					}
+				}
+				else
+				{
+					var error = new Exception(String.Format(
+						"Login check failed for '{0}'.\r\nCheck count: {1}.",
+						this.BaseUrl,
+						check
+					));
+
+					ErrorLog.LogException(error);
+				}
+
+				this.User = details;
+				this.OnLogin(this, new LoginEventArgs(details));
+				return;
+			});
+		}
+
+		public override void LogoutUser()
+		{
+			var uri = new Uri(this.BaseUrl, UriKind.Absolute);
+
+			Http.RemoveDomainCookies(uri);
+
+			this.User.IsLoggedIn = false;
+			this.User.Cookies = new CookieCollection();
+		}
+
+		public override void MakeReady(int sectionId)
+		{
+			if (!this.User.IsLoggedIn) return;
+
+			AsyncHelper.Run(() =>
+			{
+				string url = this.BaseUrl + this.NewTopicPath.Replace("{0}", sectionId.ToString());
+				var doc = new HtmlDocument();
+				var replacements = new Dictionary<string, string>();
+
+				HttpWebRequest req = Http.Prepare(url);
+
+				req.Method = "GET";
+
+				HttpResult result = this.AllowRedirects ? Http.HandleRedirects(Http.FastRequest(req), false) : Http.FastRequest(req);
+
+				// Did the request fail?
+				if (result.HasError || result.Data.Trim().Length == 0)
+				{
+					ErrorLog.LogException(result.Error);
+					this.OnReadyChanged(this, new EventArgs());
+					return;
+				}
+
+				doc.LoadHtml(result.Data);
+
+				// Extract required data
+				foreach (HtmlNode n in doc.DocumentNode.SelectNodes("//input[@type='hidden']"))
+				{
+					switch (n.Attributes["name"].Value)
+					{
+						case "auth_key":
+							if (!replacements.ContainsKey("[auth_key]"))
+								replacements.Add("[auth_key]", n.Attributes["value"].Value);
+							break;
+
+						case "attach_post_key":
+							if (!replacements.ContainsKey("[attach_post_key]"))
+								replacements.Add("[attach_post_key]", n.Attributes["value"].Value);
+							break;
+
+						case "s":
+							if (!replacements.ContainsKey("[s]"))
+								replacements.Add("[s]", n.Attributes["value"].Value);
+							break;
+
+						default:
+							break;
+					}
+				}
+
+				// Check if we got the needed info
+				if (replacements.Count != 3) replacements.Clear();
+
+				// Done
+				this.TemplateReplacements = replacements;
+				this.OnReadyChanged(this, new EventArgs());
+
+				if (!this.IsReady)
+				{
+					var error = new Exception(String.Format(
+						"MakeReady({0}) failed for site '{1}'.\r\nUrl used: {2}.",
+						sectionId,
+						this.BaseUrl,
+						url
+					));
+
+					ErrorLog.LogException(error);
+				}
+			});
+		}
+
+		public override HttpWebRequest CreateTopic(SiteTopic topic)
+		{
+			if (!this.User.IsLoggedIn || !this.IsReady) return null;
+
+			string url = this.BaseUrl + "/index.php";
+			string data = this.Details.Format(topic, this.TemplateReplacements).Replace("\r", "");
+			byte[] rawData = this.SiteEncoding.GetBytes(data);
+
+			HttpWebRequest req = Http.Prepare(url);
+			Stream stream;
+
+			req.Method = "POST";
+			req.ContentType = Res.IPBoard_300_ContentType;
+			req.ContentLength = rawData.Length;
+			req.Referer = url;
+			//req.AllowAutoRedirect = false;
+
+			stream = req.GetRequestStream();
+			stream.Write(rawData, 0, rawData.Length);
+			stream.Close();
+
+			return req;
+		}
+
+		public override HttpWebRequest[] CreateTopics(SiteTopic[] topics)
+		{
+			if (!this.User.IsLoggedIn || !this.IsReady) return null;
+
+			string url, data;
+			byte[] rawData;
+			HttpWebRequest req;
+			Stream stream;
+
+			var requests = new List<HttpWebRequest>();
+
+			foreach (SiteTopic topic in topics)
+			{
+				url = this.BaseUrl + "/index.php";
+				data = this.Details.Format(topic, this.TemplateReplacements).Replace("\r", "");
+				rawData = this.SiteEncoding.GetBytes(data);
+				req = Http.Prepare(url);
+
+				req.Method = "POST";
+				req.ContentType = Res.IPBoard_300_ContentType;
+				req.ContentLength = rawData.Length;
+				req.Referer = url;
+				//req.AllowAutoRedirect = false;
+
+				stream = req.GetRequestStream();
+				stream.Write(rawData, 0, rawData.Length);
+				stream.Close();
+
+				requests.Add(req);
+			}
+
+			return requests.ToArray();
+		}
+
+		public override HttpWebRequest GetPage(int sectionId, int page, int siteTopicsPerPage)
+		{
+			// Fix
+			page = (page > 1) ? page - 1 : 0;
+
+			string url = this.BaseUrl + String.Format(this.PagePath, sectionId, page * siteTopicsPerPage);
+			HttpWebRequest req = Http.Prepare(url);
+
+			req.Method = "GET";
+			req.Referer = url;
+
+			return req;
+		}
+
+		public override SiteTopic GetTopic(string url)
+		{
+			if (!this.User.IsLoggedIn) return null;
+
+			HtmlDocument doc = new HtmlDocument();
+			HttpWebRequest req;
+			HttpResult result;
+
+			req = Http.Prepare(url);
+			req.Method = "GET";
+			req.Referer = url;
+
+			try
+			{
+				result = this.AllowRedirects ? Http.HandleRedirects(Http.Request(req), false) : Http.Request(req);
+				doc.LoadHtml(result.Data);
+
+				ErrorLog.LogException(result.Error);
+
+				HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//a[@title='Reply directly to this post']");
+				string link = HttpUtility.HtmlDecode(nodes[0].GetAttributeValue("href", String.Empty));
+
+				req = Http.Prepare(link);
+				req.Method = "GET";
+				req.Referer = url;
+
+				result = this.AllowRedirects ? Http.HandleRedirects(Http.Request(req), false) : Http.Request(req);
+				doc.LoadHtml(result.Data);
+
+				ErrorLog.LogException(result.Error);
+
+				string title = (from n in doc.DocumentNode.SelectNodes("//h1[@class='ipsType_pagetitle']")
 								where n.InnerText.Trim().Contains("Replying to ")
 								select n.InnerText.Replace("Replying to ", "")).ToArray()[0];
 				string content = doc.DocumentNode.SelectNodes("//textarea[@name='Post']")[0].InnerText;

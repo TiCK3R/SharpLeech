@@ -517,6 +517,6 @@ using Res = Hyperz.SharpLeech.Engine.Properties.Resources;
 &lt;Errors&gt;&lt;/Errors&gt;</value>
   </data>
   <data name="IPBoard_314_Login" xml:space="preserve">
-    <value>auth_key={2}&amp;referer={3}&amp;username={0}&amp;password={1}&amp;rememberMe=1</value>
+    <value>auth_key={2}&amp;referer={3}&amp;username={0}&amp;password={1}&amp;ips_username={0}&amp;ips_password={1}&amp;rememberMe=1</value>
   </data>
 </root>
