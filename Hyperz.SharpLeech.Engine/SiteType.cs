@@ -66,17 +66,17 @@ namespace Hyperz.SharpLeech.Engine
 
 		public abstract string[] GetTopicUrls(string html);
 
-		protected virtual void OnLogin(object sender, LoginEventArgs e)
+		public virtual void OnLogin(object sender, LoginEventArgs e)
 		{
 			if (this.Login != null) this.Login(sender, e);
 		}
 
-		protected virtual void OnReadyChanged(object sender, EventArgs e)
+		public virtual void OnReadyChanged(object sender, EventArgs e)
 		{
 			if (this.ReadyChanged != null) this.ReadyChanged(sender, e);
 		}
 
-		protected virtual void OnTopicPosted(object sender, TopicPostedEventArgs e)
+		public virtual void OnTopicPosted(object sender, TopicPostedEventArgs e)
 		{
 			if (this.TopicPosted != null) this.TopicPosted(sender, e);
 		}
