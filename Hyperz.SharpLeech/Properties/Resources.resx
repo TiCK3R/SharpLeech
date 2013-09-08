@@ -182,6 +182,6 @@ Would you like to use a web browser to login?</value>
     <value>{0} Now Bumpin' {1}</value>
   </data>
   <data name="WindowTitleFormat" xml:space="preserve">
-    <value>SharpLeech {0} RC1 | AdminSpot.net |</value>
+    <value>SharpLeech {0}</value>
   </data>
 </root>

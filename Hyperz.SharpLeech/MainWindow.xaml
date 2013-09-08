@@ -10,7 +10,7 @@
         xmlns:engine="clr-namespace:Hyperz.SharpLeech.Engine;assembly=Hyperz.SharpLeech.Engine"
         xmlns:ctrl="clr-namespace:Hyperz.SharpLeech.Controls"
         mc:Ignorable="d" Background="{Binding Source={StaticResource WindowBackgroundBrush}}"
-        Title="SharpLeech 2.0.0 RC1" Height="414" Width="819"
+        Title="SharpLeech 2" Height="414" Width="819"
         Loaded="Window_Loaded" MinHeight="414" MinWidth="819"
         VisualClearTypeHint="Enabled" VisualBitmapScalingMode="NearestNeighbor"
         TextOptions.TextFormattingMode="Display" WindowStartupLocation="CenterScreen"
@@ -569,19 +569,14 @@
                     <GroupBox Margin="3" Header="SharpLeech Release Notes" Grid.RowSpan="2">
                         <TextBlock Margin="3" TextWrapping="Wrap">
                             <Span>
-                                RC1 is mainly a release focussed on adding IP.Board 3.1.4 support.
-								Posting should now work, however, I did not test scrapping so I'm not
-								sure if that'll work.
+                                Nothing new to report...
                                 <LineBreak /><LineBreak />
                                 <Bold>Special Thanks:</Bold><LineBreak />
-                                Everyone over @ AdminSpot.net
+                                chukky
                                 <LineBreak /><LineBreak />
                                 <Bold>The Interwebs:</Bold><LineBreak />
                                 - Home page -> 
-                                <Hyperlink Tag="http://adminspot.net/" Click="Hyperlink_Click">AdminSpot.net</Hyperlink>
-								<LineBreak />
-                                - Release topic -> Somewhere in 
-                                <Hyperlink Tag="http://adminspot.net/forum/10-webmasters-tools/" Click="Hyperlink_Click">here</Hyperlink>
+                                <Hyperlink Tag="https://github.com/Hyperz/SharpLeech" Click="Hyperlink_Click">SharpLeech @ GitHub.com</Hyperlink>
                                 <LineBreak /><LineBreak />
                                 Thanks for using SharpLeech (:
                             </Span>
