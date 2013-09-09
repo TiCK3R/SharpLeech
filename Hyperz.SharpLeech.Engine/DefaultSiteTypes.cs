@@ -1446,7 +1446,7 @@ namespace Hyperz.SharpLeech.Engine
 
 				req.Method = "GET";
 
-				HttpResult result = this.AllowRedirects ? Http.HandleRedirects(Http.FastRequest(req), false) : Http.FastRequest(req);
+				HttpResult result = this.AllowRedirects ? Http.HandleRedirects(Http.Request(req), false) : Http.Request(req);
 
 				// Did the request fail?
 				if (result.HasError || result.Data.Trim().Length == 0)
